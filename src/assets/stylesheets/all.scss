@@ -1,0 +1,11 @@
+@import "~bootstrap/scss/functions";
+@import './helpers/variables';
+@import '~bootstrap/scss/bootstrap';
+
+//base
+.btn-primary,.btn-primary:hover,
+.btn-primary:focus,.btn-outline-primary:hover,
+.btn-danger,.btn-danger:hover,
+.btn-outline-danger:hover {
+  color: #FFFFFF;
+}
