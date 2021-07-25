@@ -86,7 +86,6 @@ import Alert from 'bootstrap/js/dist/alert';
 Array.from(document.querySelectorAll('.alert')).forEach(
   alertNode => new Alert(alert)
 );
-// 問題一，為何這樣alert才會動？
 export default {
   data () {
     return {
