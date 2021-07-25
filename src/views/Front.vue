@@ -22,37 +22,37 @@
       >
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item p-0">
-            <router-link class="nav-link pb-0 pt-3 active" to="/">
+            <router-link class="nav-link pb-0 pt-3" :class="{ 'active' : tab === '/'}" to="/">
               <span class="px-3">首頁</span>
               <div class="d-block underlineBox mt-3"></div>
             </router-link>
           </li>
           <li class="nav-item p-0">
-            <router-link class="nav-link pb-0 pt-3" to="/products">
+            <router-link class="nav-link pb-0 pt-3" :class="{ 'active' : tab === '/products'}" to="/products">
               <span class="px-3">產品列表</span>
               <div class="d-block underlineBox mt-3"></div>
             </router-link>
           </li>
           <li class="nav-item p-0">
-            <router-link class="nav-link pb-0 pt-3" to="/blog">
+            <router-link class="nav-link pb-0 pt-3" :class="{ 'active' : tab === '/blog'}" to="/blog">
               <span class="px-3">棒球專欄</span>
               <div class="d-block underlineBox mt-3"></div>
             </router-link>
           </li>
           <li class="d-block d-lg-none nav-item p-0">
-            <router-link class="nav-link pb-0 pt-3" to="/cart">
+            <router-link class="nav-link pb-0 pt-3" :class="{ 'active' : tab === '/cart'}" to="/cart">
               <span class="px-3">購物車</span>
               <div class="d-block underlineBox mt-3"></div>
             </router-link>
           </li>
           <li class="d-block d-lg-none nav-item p-0">
-            <router-link class="nav-link pb-0 pt-3" to="/favorite">
+            <router-link class="nav-link pb-0 pt-3" :class="{ 'active' : tab === '/favorite'}" to="/favorite">
               <span class="px-3">喜愛商品</span>
               <div class="d-block underlineBox mt-3"></div>
             </router-link>
           </li>
           <li class="d-block d-lg-none nav-item p-0">
-            <router-link class="nav-link pb-0 pt-3" to="/login">
+            <router-link class="nav-link pb-0 pt-3" :class="{ 'active' : tab === '/login'}" to="/login">
               <span class="px-3">後台登入</span>
               <div class="d-block underlineBox mt-3"></div>
             </router-link>
@@ -60,19 +60,19 @@
         </ul>
         <ul class="d-none d-lg-flex navbar-nav mb-0">
           <li class="nav-item p-0">
-            <router-link class="nav-link pb-0 pt-3" to="/cart">
+            <router-link class="nav-link pb-0 pt-3" :class="{ 'active' : tab === '/cart'}" to="/cart">
               <span class="material-icons px-3">shopping_cart</span>
               <div class="d-block underlineBox mt-2"></div>
             </router-link>
           </li>
           <li class="nav-item p-0">
-            <router-link class="nav-link pb-0 pt-3" to="/favorite">
+            <router-link class="nav-link pb-0 pt-3" :class="{ 'active' : tab === '/favorite'}" to="/favorite">
               <span class="material-icons px-3">favorite</span>
               <div class="d-block underlineBox mt-2"></div>
             </router-link>
           </li>
           <li class="nav-item p-0">
-            <router-link class="nav-link button11 pb-0 pt-3" to="/login">
+            <router-link class="nav-link button11 pb-0 pt-3" :class="{ 'active' : tab === '/login'}" to="/login">
               <span class="material-icons px-3">manage_accounts</span>
               <div class="d-block underlineBox mt-2"></div>
             </router-link>
@@ -98,22 +98,20 @@
   }
 }
 .navbar-collapse {
-  @media (max-width:992px) {
+  @media (max-width: 991px) {
     position: absolute;
     width: 100%;
     top: 44px;
     left: 0;
     background-color: white;
+    z-index: 1100;
   }
 }
-.navbar-nav {
-  z-index: 1100;
+.navbar {
+  z-index: 1110;
   .nav-link {
     font-weight: bolder;
-    &.active {
-      color: #41acfa;
-    }
-    &:hover {
+    &.active,&:hover {
       color: #41acfa;
       .underlineBox {
         width: 100%;
@@ -128,3 +126,16 @@
   }
 }
 </style>
+
+<script>
+export default {
+  data () {
+    return {};
+  },
+  computed: {
+    tab () {
+      return this.$route.path;
+    }
+  }
+};
+</script>

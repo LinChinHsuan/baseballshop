@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-primary p-5 mt-5">
+  <footer class="bg-primary p-5">
     <div class="container text-white">
       <div class="row">
         <h3 class="h2 fw-bold">藍天野球</h3>

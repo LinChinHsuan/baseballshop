@@ -1,5 +1,5 @@
 {
-  "name": "hanafuda_project",
+  "name": "baseball_project",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -16,8 +16,10 @@
     "axios": "^0.21.1",
     "bootstrap": "^5.0.1",
     "core-js": "^3.6.5",
+    "swiper": "^6.8.0",
     "vee-validate": "^4.4.5",
     "vue": "^3.0.0",
+    "vue-awesome-swiper": "^4.1.1",
     "vue-axios": "^3.2.4",
     "vue-loading-overlay": "^4.0.3",
     "vue-router": "^4.0.0-0"

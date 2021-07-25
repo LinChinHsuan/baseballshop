@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-4">
+  <div class="container mt-4 mb-5">
     <div class="row justify-content-center">
       <div class="col-md-8 col-lg-6">
         <div class="row mb-4">
@@ -109,18 +109,18 @@
             </div>
           </div>
           <table class="table text-muted">
-            <tbody>
+            <tbody v-if="cart.total !== cart.final_total">
               <tr>
                 <th scope="row" class="border-0 px-0 font-weight-normal">
                   小計
                 </th>
-                <td class="text-end border-0 px-0">NT$24,000</td>
+                <td class="text-end border-0 px-0">NT$ {{ cart.total }}</td>
               </tr>
               <tr>
                 <th scope="row" class="border-0 px-0 pt-0 font-weight-normal">
-                  運費
+                  折扣
                 </th>
-                <td class="text-end border-0 px-0 pt-0">NT$500</td>
+                <td class="text-end border-0 px-0 pt-0">NT$ {{cart.total - cart.final_total}}</td>
               </tr>
             </tbody>
           </table>

@@ -63,7 +63,7 @@
                     <label for="images" class="form-label">圖片網址</label>
                     <input
                       type="text"
-                      class="form-control"
+                      class="form-control mb-2"
                       id="images"
                       v-model="tempProduct.imagesUrl[key]"
                       placeholder="請輸入圖片連結"

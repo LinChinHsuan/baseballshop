@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fliud productBaner mb-5"></div>
+  <div class="container-fliud productBaner mb-4 mb-md-5"></div>
   <div class="container">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb mb-4">
@@ -13,29 +13,82 @@
       <div class="d-none d-md-block col-md-9 col-lg-10 ms-auto">
         <div class="d-flex align-items-center mb-3">
           <p class="h5 mb-0">所有商品</p>
-          <select class="form-select w-auto ms-auto">
-            <option selected>預設排序</option>
-            <option value="1">價格由低至高</option>
-            <option value="2">價格由高至低</option>
+          <p class="mb-0 ms-auto">本頁共有 {{ filterProducts.length }} 件商品</p>
+          <select
+            class="form-select w-auto ms-3"
+            v-model="filter"
+            @change="usefilter"
+          >
+            <option selected value="">預設排序</option>
+            <option value="lowToHigh">價格由低至高</option>
+            <option value="HighTolow">價格由高至低</option>
           </select>
-          <p class="mb-0 ms-2">共有 6 件商品</p>
-          <div class="btn-group ms-2" role="group">
-            <button type="button" class="btn btn-outline-primary">
-              <i class="fas fa-th-large"></i>
-            </button>
-            <button type="button" class="btn btn-outline-primary">
-              <i class="fas fa-th-list"></i>
-            </button>
-          </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3 col-lg-2">
+      <div class="col d-md-none mb-3">
+        <div class="list-group list-group-flush border border-primary border-4">
+          <div class="d-flex">
+            <button
+              type="button"
+              class="list-group-item list-group-item-action py-3"
+              :class="{ active: category === 'all' }"
+              @click.prevent="category = 'all'"
+            >
+              全部商品
+            </button>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action py-3"
+              :class="{ active: category === '棒球' }"
+              @click.prevent="category = '棒球'"
+            >
+              棒球專區
+            </button>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action py-3"
+              :class="{ active: category === '球棒' }"
+              @click.prevent="category = '球棒'"
+            >
+              品質球棒
+            </button>
+          </div>
+          <div class="d-flex">
+            <button
+              type="button"
+              class="list-group-item list-group-item-action py-3"
+              :class="{ active: category === '手套' }"
+              @click.prevent="category = '手套'"
+            >
+              牛皮手套
+            </button>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action py-3"
+              :class="{ active: category === '護具' }"
+              @click.prevent="category = '護具'"
+            >
+              專業護具
+            </button>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action py-3"
+              :class="{ active: category === '其他' }"
+              @click.prevent="category = '其他'"
+            >
+              其他商品
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="d-none d-md-block col-md-3 col-lg-2">
         <div class="list-group list-group-flush border border-primary border-4">
           <button
             type="button"
-            class="list-group-item list-group-item-action py-3 active"
+            class="list-group-item list-group-item-action py-3"
+            :class="{ active: category === 'all' }"
             @click.prevent="category = 'all'"
           >
             全部商品
@@ -43,6 +96,7 @@
           <button
             type="button"
             class="list-group-item list-group-item-action py-3"
+            :class="{ active: category === '棒球' }"
             @click.prevent="category = '棒球'"
           >
             棒球專區
@@ -50,6 +104,7 @@
           <button
             type="button"
             class="list-group-item list-group-item-action py-3"
+            :class="{ active: category === '球棒' }"
             @click.prevent="category = '球棒'"
           >
             品質球棒
@@ -57,6 +112,7 @@
           <button
             type="button"
             class="list-group-item list-group-item-action py-3"
+            :class="{ active: category === '手套' }"
             @click.prevent="category = '手套'"
           >
             牛皮手套
@@ -64,6 +120,7 @@
           <button
             type="button"
             class="list-group-item list-group-item-action py-3"
+            :class="{ active: category === '護具' }"
             @click.prevent="category = '護具'"
           >
             專業護具
@@ -71,6 +128,7 @@
           <button
             type="button"
             class="list-group-item list-group-item-action py-3"
+            :class="{ active: category === '其他' }"
             @click.prevent="category = '其他'"
           >
             其他商品
@@ -97,6 +155,7 @@
               >
                 <span
                   class="material-icons position-absolute p-2"
+                  :class="{ 'text-danger': isFavorite(item.id) }"
                   @click.stop="addFavorite(item)"
                   >favorite</span
                 >
@@ -139,6 +198,19 @@
       </div>
     </div>
   </div>
+  <div class="container-fluid coupon p-4 mt-5">
+    <div class="py-4 backdrop-blur">
+      <p class="text-center h2 fw-bold mb-3 text-white">球季開打大優惠</p>
+      <p class="text-center h3 fw-bold mb-0 text-white">
+        慶祝中職開打，優惠券碼輸入 CPBL2021，全館商品享有 8 折優惠！
+      </p>
+      <div class="d-flex justify-content-center mt-3">
+        <router-link class="btn btn-primary text-white" to="/cart">
+          使用優惠
+        </router-link>
+      </div>
+    </div>
+  </div>
   <div
     class="w-100 d-flex justify-content-center position-fixed alertMsg"
     v-if="alertShow"
@@ -171,32 +243,13 @@
   background-size: cover;
   background-position: center;
 }
-// .list-group-item-action:hover, .list-group-item-action:focus {
-//   background-color: transparent;
-// }
-.list-group-flush > .list-group-item {
+.list-group-flush .list-group-item {
   border: none;
   text-align: center;
-  // &::before {
-  //   content: '';
-  //   position: absolute;
-  //   width: 0px;
-  //   height: 100%;
-  //   left: 0;
-  //   bottom: 0;
-  //   background-color: #41acfa;
-  //   transition: all 0.3s ease-out;
-  //   z-index: 0;
-  // }
   transition: background-color 0.2s;
   &:hover {
-    // background-color: transparent;
     background-color: #41acfa;
     color: #ffffff;
-    // &::before {
-    //   width: 100%;
-    //   z-index: -1;
-    // }
   }
 }
 .productImage {
@@ -234,7 +287,16 @@
   }
 }
 .alertMsg {
-  top: 20px;
+  top: 40px;
+}
+.coupon {
+  background-image: url(../assets/images/baner_4.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.backdrop-blur {
+  backdrop-filter: blur(10px);
 }
 </style>
 
@@ -245,9 +307,11 @@ export default {
   data () {
     return {
       products: {},
+      filter: '',
       category: 'all',
       pages: {},
       favorite: [],
+      favoriteIds: [],
       alertShow: false,
       alertMsg: ''
     };
@@ -292,7 +356,7 @@ export default {
       }
     },
     getProduct (id) {
-      this.$router.push(`/products/${id}`);
+      this.$router.push(`/product/${id}`);
     },
     addCart (id) {
       this.$http
@@ -336,6 +400,7 @@ export default {
           return item.id === id;
         });
         this.favorite.splice(this.favorite.indexOf(item), 1);
+        console.log(this.favorite);
         localStorage.setItem('favorite', JSON.stringify(this.favorite));
         this.alertMsg = '已將商品從我的最愛中刪除！';
       }
@@ -346,7 +411,31 @@ export default {
       }, 3000);
     },
     getFavorite () {
+      const vm = this;
+      this.favoriteIds = [];
       this.favorite = JSON.parse(localStorage.getItem('favorite')) || [];
+      this.favorite.forEach(function (item) {
+        vm.favoriteIds.push(item.id);
+      });
+    },
+    isFavorite (id) {
+      return this.favoriteIds.some(function (item) {
+        return item === id;
+      });
+    },
+    usefilter () {
+      if (this.filter === 'lowToHigh') {
+        this.products.sort(function (a, b) {
+          return a.price - b.price;
+        });
+      } else if (this.filter === 'HighTolow') {
+        this.products.sort(function (a, b) {
+          return b.price - a.price;
+        });
+      } else {
+        this.getProducts();
+      }
+      console.log(this.filter);
     }
   },
   computed: {
@@ -370,8 +459,8 @@ export default {
     }
   },
   created () {
-    this.getProducts();
     this.getFavorite();
+    this.getProducts();
   }
 };
 </script>
